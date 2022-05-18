@@ -1,35 +1,35 @@
-const express = require('express')
-const mongoose = require("mongoose")
-const PORT = 5000;
-const mongoURI = require('./config/keys.js').mongoURI 
+const PORT = process.env.PORT || 5000;
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors')
+const passport = require('passport');
 
-const app = express()
+const app = express();
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 
-mongoose.connect(mongoURI, {
+app.use(cors({ origin: ['http://localhost:8080'], }))
+app.use(cors());
+
+app.use(passport.initialize());
+
+const db = require('./config/keys').mongoURI;
+mongoose.connect(db, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 
 }).then(() => {
-    console.log(`Database connected successfully ${mongoURI}`)
+    console.log(`Database connected successfully ${db}`)
 }).catch(err => {
     console.log(`Unable to connect with the database ${err}`)
 });
 
 
-app.get('/', (req, res) =>{
-    res.send("hello ")
-
-})
-
-const auth = require('./api/auth');
-app.use('/auth',auth);
-
-
+const auth = require('./routes/api/auth');
+app.use('/api/auth',auth);
 
 
 app.listen(PORT, () => {
-    console.log("Server started on port" +PORT);
-})
-
+    console.log(`Server started on port ${PORT}`);

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const User = require('../Model/User');
+const User = require('../../Model/User');
 const bcrypt = require('bcrypt')
 
 
@@ -8,25 +8,22 @@ const bcrypt = require('bcrypt')
 router.post('/register', (req, res) => {
     let {
         username,
-        firstname,
-        lastname,
         email,
         password,
         confirm_password,
-        role
     } = req.body
-
+    let role ='User'
 
     if (password !== confirm_password) {
         return res.status(400).json({
-            msg: "Passwords do not match."
+            msg: "Η Επαλήθευση του κωδικού απέτυχε."
         });
     }
     User.findOne({username: username})
     .then(user => {
         if (user) {
             return res.status(400).json({
-                msg: "Username is already taken."
+                msg: "Το Username Χρησιμοποιείται."
             });
         }
     }).catch(err=>{
@@ -37,15 +34,13 @@ router.post('/register', (req, res) => {
     }).then(user => {
         if (user) {
             return res.status(400).json({
-                msg: "Email is already registred. Did you forgot your password?"
+                msg: "Το Email Χρησιμοποιείται?"
             });
         }
     });
 
     let newUser = new User({
         username,
-        firstname,
-        lastname,
         email,
         password,
         confirm_password,
@@ -58,7 +53,7 @@ router.post('/register', (req, res) => {
             newUser.save().then(user => {
                 return res.status(201).json({
                     success: true,
-                    msg: "User is now registered."
+                    msg: "Εγγραφήκατε με επιτυχία."
                 });
             });
         });
