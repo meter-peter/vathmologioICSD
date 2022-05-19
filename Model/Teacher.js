@@ -14,9 +14,11 @@ const TeacherSchema = new Schema({
         type: Number
     },
 
-    lessonTeaching: {
-        type: Schema.Types.ObjectId,
-        ref: 'lessons'
+    teachings: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'teachings'
+        }]
     },
 
     user: {

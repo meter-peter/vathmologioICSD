@@ -4,9 +4,6 @@ const { Schema } = mongoose;
 
 
 TeachingSchema = new Schema({
-        name: {
-            type: String
-        },
         lesson: {
             type: Schema.Types.ObjectId,
             ref: 'lessons'
