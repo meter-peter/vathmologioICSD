@@ -12,23 +12,23 @@ router.post('/register', (req, res) => {
         password,
         confirm_password,
     } = req.body
-    let role ='User'
+    let role = 'User'
 
     if (password !== confirm_password) {
         return res.status(400).json({
             msg: "Η Επαλήθευση του κωδικού απέτυχε."
         });
     }
-    User.findOne({username: username})
-    .then(user => {
-        if (user) {
-            return res.status(400).json({
-                msg: "Το Username Χρησιμοποιείται."
-            });
-        }
-    }).catch(err=>{
-        return res.send(err);
-    })
+    User.findOne({ username: username })
+        .then(user => {
+            if (user) {
+                return res.status(400).json({
+                    msg: "Το Username Χρησιμοποιείται."
+                });
+            }
+        }).catch(err => {
+            return res.send(err);
+        })
     User.findOne({
         email: email
     }).then(user => {
@@ -44,7 +44,6 @@ router.post('/register', (req, res) => {
         email,
         password,
         confirm_password,
-        role
     });
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
