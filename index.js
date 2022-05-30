@@ -10,8 +10,7 @@ const passport = require('passport');
 const db = require('./config/keys').mongoURI;
 mongoose.connect(db, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
+    useUnifiedTopology: true
 
 }).then(() => {
     console.log(`Database connected successfully ${db}`)

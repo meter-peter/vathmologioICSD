@@ -12,7 +12,6 @@ router.post('/register', (req, res) => {
         password,
         confirm_password,
     } = req.body
-    let role = 'User'
 
     if (password !== confirm_password) {
         return res.status(400).json({

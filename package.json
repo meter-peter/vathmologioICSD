@@ -1,21 +1,26 @@
 {
-  "name": "vathmologioicsd",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "json": "^11.0.0",
-    "mongoose": "^6.3.3",
-    "nodemon": "^2.0.16",
-    "passport": "^0.5.3",
-    "passport-jwt": "^4.0.0"
-  }
+    "name": "vathmologioicsd",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "client-install": "npm install --prefix client",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "server": "nodemon app.js",
+        "client": "npm run serve --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "concurrently": "^7.2.1",
+        "cors": "^2.8.5",
+        "express": "^4.18.1",
+        "json": "^11.0.0",
+        "mongoose": "^6.3.3",
+        "nodemon": "^2.0.16",
+        "passport": "^0.5.3",
+        "passport-jwt": "^4.0.0"
+    }
 }
